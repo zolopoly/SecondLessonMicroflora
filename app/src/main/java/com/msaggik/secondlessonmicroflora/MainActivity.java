@@ -17,6 +17,21 @@ public class MainActivity extends AppCompatActivity {
     private int preCount = 0; // вспомогательный счётчик количества предыдущего поколения количества микрофлоры
 
     @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("count", count);
+        outState.putInt("preCount", preCount);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        count = savedInstanceState.getInt("count");
+        preCount = savedInstanceState.getInt("preCount");
+        output.setText(String.valueOf(count));
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         Toast.makeText(this, "Старт активности", Toast.LENGTH_SHORT).show();
